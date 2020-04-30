@@ -6,33 +6,51 @@
 // countHi2("xhixhi") → 0
 
 const countHi2 = str => {
-let currentCount = 0;
-  // need inner recursive function 
+  // declare outside counter to keep track
+  let currentCount = 0
+
+  // inner recursive function
   const countFunc = (str, count) => {
-    let newCount = count
-    // check if first 2 chars are 'hi'
-    if(str.slice(0,2) === 'hi') {
-      // if there are other chars recurse on remaining
-      if ( str.slice(2)) {
-        newCount += 1;
-       currentCount += countFunc(str.slice(2), newCount)
+    // if current char is x
+    if(str.slice(0,1) === 'x') {
+      // check if next two chars are 'hi'
+      if (str.slice(1,3) === 'hi') {
+        // recurse on str.slice(3) dont increment
+        if (str.slice(3)) {
+          countFunc(str.slice(3), currentCount)
+        }
       } else {
-        currentCount += newCount + 1;
+        // recurse on str.slice(1)
+        if(str.slice(1)) {
+          countFunc(str.slice(1), currentCount)
+        }
+    
       }
     } else {
-      if ( str.slice(1)) {
-        countFunc(str.slice(1), newCount)
-      } {
-        return currentCount
+    // else
+      // check if first two chars are hi
+      if ( str.slice(0,2) === 'hi') {
+        // check if there are more chars after hi
+        if (str.slice(2)) {
+          // increment counter and recurse on remaining
+          currentCount += 1;
+          countFunc(str.slice(2), currentCount)
+        } else {
+          currentCount += 1;
+        }
+          
+      } else {
+          countFunc(str.slice(1), currentCount)
       }
     }
-
-    return currentCount
   }
-  countFunc(str, 0)
+  countFunc(str, currentCount)  
+  
   return currentCount
-
 }
 
 countHi2("xhixhi")
+countHi2("ahibhi")
 console.log('countHi2("xhixhi")', countHi2("xhixhi"))
+console.log('countHi2("ahibhi")', countHi2("ahibhi"));
+console.log(' countHi2("ahixhi")',  countHi2("ahixhi"))
