@@ -6,7 +6,30 @@
 // strCount("catcowcat", "cow") → 1
 // strCount("catcowcat", "dog") → 0
 
+const strCount = (str, word) => {
+  // declare length variables and counter
+  const wordlen = word.length; 
 
+  if (str.length >= wordlen) {
+    if (str.slice(0, wordlen) === word) {
+        if( str.slice(wordlen)) {
+          return 1 + strCount(str.slice(wordlen), word);
+        } else {
+          return 1;
+        }
+      } else {
+        if( str.slice(wordlen)) {
+          return 0 + strCount(str.slice(wordlen), word)
+        } else {
+          return 0;
+        }
+      }
+        
+  } else {
+    return 0
+  }
+  
+}
 
 console.log('strCount("catcowcat", "cat")', strCount("catcowcat", "cat"))
 console.log('strCount("catcowcat", "cow")', strCount("catcowcat", "cow"))
