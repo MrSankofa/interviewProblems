@@ -2,13 +2,11 @@
 
 //                1
 
-//        2                3
+//        2                9
 
-//   4        5        6         7
+//   3        6        10         13
 
-// 8   9   10  11   12  13   14   15
-
-// 1, 2, 4, 8, 9, 5, 10, 11, 3, 6, 12, 13, 7, 14, 15
+// 4   5   7    8   11    12    14   15
 
 // then implement a DFS to sum the values of that tree for every node
 
@@ -32,7 +30,7 @@ const bTree5 = new binaryTree;
 const bTree6 = new binaryTree;
 const bTree7 = new binaryTree;
 const bTree8 = new binaryTree;
-const bTree9 = new binaryTree;
+const bTree9= new binaryTree;
 const bTree10 = new binaryTree;
 const bTree11 = new binaryTree;
 const bTree12 = new binaryTree;
@@ -42,62 +40,52 @@ const bTree15 = new binaryTree;
 
 root.value = 1;
 bTree2.value = 2
-bTree3.value = 3;
+bTree9.value = 9
 root.left = bTree2;
-root.right = bTree3;
+root.right = bTree9;
+
+bTree3.value = 3;
+bTree6.value = 6;
+bTree2.left = bTree3
+bTree2.right = bTree6;
+
+bTree10.value = 10;
+bTree13.value = 13;
+bTree9.left = bTree10;
+bTree9.right = bTree13;
 
 bTree4.value = 4;
 bTree5.value = 5;
-bTree2.left = bTree4
-bTree2.right = bTree5;
+bTree3.left = bTree4;
+bTree3.right = bTree5;
 
-bTree6.value = 6;
 bTree7.value = 7;
-bTree3.left = bTree6;
-bTree3.right = bTree7;
-
 bTree8.value = 8;
-bTree9.value = 9;
-bTree4.left = bTree8;
-bTree4.right = bTree9;
+bTree6.left = bTree7;
+bTree6.right = bTree8;
 
-bTree10.value = 10;
 bTree11.value = 11;
-bTree5.left = bTree10;
-bTree5.right = bTree11
-
 bTree12.value = 12;
-bTree13.value = 13;
-bTree6.left = bTree12;
-bTree6.right = bTree13;
+bTree10.left = bTree11;
+bTree10.right = bTree12;
 
 bTree14.value = 14;
 bTree15.value = 15;
-bTree7.left = bTree14;
-bTree7.right = bTree15;
+bTree13.left = bTree14;
+bTree13.right = bTree15;
 
 
-
-const sumTreeDFS = (tree, sum) => {
-    
+let sum = 0
+const sumTreeDFS = (tree) => {
+  sum += tree.value
+  console.log('tree.value', tree.value)
+  console.log('sum', sum)
    // check if left exists
-   if (tree && tree.left) {
-     // return value + sumTreeDFS(left)
-     sumTreeDFS(tree.left, tree.value + sum);
-     sumTreeDFS(tree.right, sum);
-    
-   } else if(tree && tree.right) {
-   // else if right exists
-     // return value + sumTreeDFS(right)
-     sumTreeDFS(tree.right, tree.value + sum);
-   } else {
-   // else 
-     // return value
-     return sum + tree.value;
-   }
-
-   return sum;
+  if (tree && tree.left) {
+     sumTreeDFS(tree.left);
+     sumTreeDFS(tree.right);
+  }
 }
 
 sumTreeDFS(root, 0)
-console.log('sumTreeDFS(root)', sumTreeDFS(root));
+// console.log('sumTreeDFS(root)', sumTreeDFS(root));
