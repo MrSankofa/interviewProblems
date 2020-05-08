@@ -75,17 +75,25 @@ bTree13.left = bTree14;
 bTree13.right = bTree15;
 
 
-let sum = 0
-const sumTreeDFS = (tree) => {
-  sum += tree.value
+const sumTreeDFS = (tree, sum) => {
   console.log('tree.value', tree.value)
   console.log('sum', sum)
-   // check if left exists
-  if (tree && tree.left) {
-     sumTreeDFS(tree.left);
-     sumTreeDFS(tree.right);
+
+  // after leaf node gather sum
+  if (!tree) {
+    return sum
+  } else if (!tree.left && !tree.right) {
+    // sum left and right
+    return tree.value + sum;
+  } else {
+    const leftSum = sumTreeDFS(tree.left, tree.value + sum)
+    const leftAndRightSum = sumTreeDFS(tree.right, leftSum)
+     
+    return leftAndRightSum;
   }
+
+ 
 }
 
 sumTreeDFS(root, 0)
-// console.log('sumTreeDFS(root)', sumTreeDFS(root));
+console.log('sumTreeDFS(root, 0)', sumTreeDFS(root, 0))
